@@ -1,24 +1,23 @@
-package de.kozlowski.news
+package de.kozlowski.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import de.kozlowski.news.core.data.repository.NewsRepository
-import de.kozlowski.news.model.NewsItem
+import de.kozlowski.profile.core.data.repository.ProfileRepository
+import de.kozlowski.profile.model.ProfileItem
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-internal class NewsViewModel(private val newsRepository: NewsRepository) : ViewModel() {
-
+internal class ProfileViewModel(private val profileRepository: ProfileRepository) : ViewModel() {
     //display or hide progress loader
     private val _showProgressLiveData = MutableLiveData<Boolean>()
     val showProgressLiveData: LiveData<Boolean> = _showProgressLiveData
 
     //data
-    private val _newsLiveData = MutableLiveData<List<NewsItem>>()
-    val newsLiveData: LiveData<List<NewsItem>> = _newsLiveData
+    private val _profileLiveData = MutableLiveData<ProfileItem>()
+    val profileLiveData: LiveData<ProfileItem> = _profileLiveData
 
     init {
         _showProgressLiveData.value = true
@@ -29,14 +28,11 @@ internal class NewsViewModel(private val newsRepository: NewsRepository) : ViewM
         viewModelScope.launch {
 
             try {
-                newsRepository.getNews().collect { newsCoreList ->
-                    newsCoreList.map { NewsItem(it.headerText, it.text) }.also {  result->
-                        _newsLiveData.postValue(result )
-                    }
-
+                profileRepository.getProfile().collect { profile ->
+                    _profileLiveData.postValue(ProfileItem(profile.name,profile.lastName,profile.email))
                 }
             } catch (e: Exception) {
-                Timber.e(e,"Could not fetch news data")
+                Timber.e(e, "Could not fetch profile data")
                 //todo : provide error to the view
             } finally {
                 _showProgressLiveData.postValue(false)

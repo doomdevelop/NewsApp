@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.tabs.TabLayoutMediator
 import de.kozlowski.newsapp.adapter.ViewPagerAdapter
 import de.kozlowski.newsapp.adapter.ViewPagerAdapter.Companion.NEWS
+import de.kozlowski.newsapp.adapter.ViewPagerAdapter.Companion.PROFILE
 import de.kozlowski.newsapp.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -24,10 +25,10 @@ class MainActivity : AppCompatActivity() {
         val viewPagerAdapter = ViewPagerAdapter(this)
         binding.viewPager.adapter = viewPagerAdapter
 
-        TabLayoutMediator(binding.tabLayout,  binding.viewPager) { tab, position ->
+        TabLayoutMediator(binding.tabLayout, binding.viewPager) { tab, position ->
             tab.text = when (position) {
                 NEWS -> getString(R.string.tab_title_news)
-//                PROFILE -> getString(R.string.tab_title_profile)
+                PROFILE -> getString(R.string.tab_title_profile)
                 else -> throw IllegalStateException("Not supported tab position !")
             }
         }.attach()

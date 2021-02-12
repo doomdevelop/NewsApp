@@ -9,8 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
-import de.kozlowski.core.data.di.NewsCoreDiProvider
 import de.kozlowski.news.adapter.NewsRecyclerViewAdapter
+import de.kozlowski.news.core.data.di.NewsCoreDiProvider
 import de.kozlowski.news.databinding.FragmentNewsTabBinding
 import de.kozlowski.news.di.NewsViewModelFactory
 
@@ -43,6 +43,7 @@ class NewsTabFragment:Fragment(R.layout.fragment_news_tab) {
         }
         return binding.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpObservers()

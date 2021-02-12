@@ -1,3 +1,5 @@
+include ':profile-core'
+include ':profile'
 include ':news'
 include ':news-core'
 include ':app'

@@ -33,10 +33,17 @@ android {
 }
 
 dependencies {
+
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     // Kotlin + coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
     api "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
     //log
     implementation "com.jakewharton.timber:timber:$timber"
+
+    testImplementation "androidx.test:rules:$test_rules"
+    testImplementation "androidx.test:runner:$test_runner"
+
+    // Unit tests
+    testImplementation "org.hamcrest:hamcrest-library:$hamcrestVersion"
 }
